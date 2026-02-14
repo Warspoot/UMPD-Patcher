@@ -28,9 +28,9 @@ def setup_environment(keystore_url: str) -> str:
     apktool_jar_url = "https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar"
     run_command(["wget", "-q", apktool_url, "-O", "apktool"], "Failed to download apktool script")
     run_command(["wget", "-q", apktool_jar_url, "-O", "apktool.jar"], "Failed to download apktool JAR")
-    os.makedirs("/usr/local/bin", exist_ok=True)
-    os.rename("apktool", "/usr/local/bin/apktool")
-    os.rename("apktool.jar", "/usr/local/bin/apktool.jar")
+    run_command(["sudo", "mkdir", "-p", "/usr/local/bin"], "Failed to create /usr/local/bin")
+    run_command(["sudo", "mv", "apktool", "/usr/local/bin/apktool"], "Failed to move apktool script")
+    run_command(["sudo", "mv", "apktool.jar", "/usr/local/bin/apktool.jar"], "Failed to move apktool JAR")
     run_command(["sudo", "chmod", "+x", "/usr/local/bin/apktool"], "Failed to set execute permissions on apktool script")
     uber_signer_url = "https://github.com/patrickfav/uber-apk-signer/releases/download/v1.3.0/uber-apk-signer-1.3.0.jar"
     run_command(["wget", "-q", uber_signer_url, "-O", "uber-apk-signer.jar"], "Failed to download uber-apk-signer")
